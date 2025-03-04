@@ -1,13 +1,11 @@
 import os
-os.environ["EVENTLET_NO_GREENDNS"] = "1"  # Disable Eventlet's greendns patching
-
 import sqlite3
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-secret-key')
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='threading')  # Use threading mode for compatibility with Gunicorn
 
 DATABASE = 'chat.db'
 
@@ -45,7 +43,6 @@ def chat():
 
 @app.route('/messages')
 def messages():
-    # Retrieve the last 50 messages (oldest first)
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("SELECT username, message, timestamp FROM messages ORDER BY id DESC LIMIT 50")
