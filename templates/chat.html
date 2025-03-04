@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Chat Room</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
     <div class="chat-container">
@@ -16,7 +15,6 @@
         </form>
     </div>
     <script>
-        // Pass the username from Flask to JavaScript
         var username = {{ username|tojson }};
     </script>
     <script src="https://cdn.socket.io/4.5.1/socket.io.min.js" integrity="sha384-fqq9ZaHzvb4aSm4t4E2Q2bKrdcKXHDkUExKYWlC8I6H3xwhe2DKdkIf7EEiRZ+c4" crossorigin="anonymous"></script>
