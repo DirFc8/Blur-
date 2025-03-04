@@ -1,11 +1,7 @@
 services:
   - type: web
-    name: flask-chat
+    name: my-chat-app
     env: python
+    plan: free
     buildCommand: "pip install -r requirements.txt"
-    envVars:
-      - key: SECRET_KEY
-        value: "your-automatically-generated-secret-key"  # Replace with a secure value
-      - key: EVENTLET_NO_GREENDNS
-        value: "1"
-    startCommand: "EVENTLET_NO_GREENDNS=1 gunicorn -k eventlet -w 1 app:app"
+    startCommand: "gunicorn --workers 2 --threads 4 --timeout 0 app:app"
