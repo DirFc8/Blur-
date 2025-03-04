@@ -1,10 +1,11 @@
 import os
+os.environ["EVENTLET_NO_GREENDNS"] = "1"  # Disable Eventlet's greendns patching
+
 import sqlite3
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-# Use the SECRET_KEY from the environment, with a fallback default value.
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-secret-key')
 socketio = SocketIO(app)
 
