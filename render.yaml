@@ -8,4 +8,4 @@ services:
         value: "your-automatically-generated-secret-key"  # Replace with a secure value
       - key: EVENTLET_NO_GREENDNS
         value: "1"
-    startCommand: "gunicorn -k eventlet -w 1 app:app"
+    startCommand: "EVENTLET_NO_GREENDNS=1 gunicorn -k eventlet -w 1 app:app"
