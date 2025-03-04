@@ -5,7 +5,7 @@ services:
     buildCommand: "pip install -r requirements.txt"
     envVars:
       - key: SECRET_KEY
-        value: "0012"  
+        value: "your-automatically-generated-secret-key"  # Replace with a secure value
       - key: EVENTLET_NO_GREENDNS
         value: "1"
     startCommand: "gunicorn -k eventlet -w 1 app:app"
